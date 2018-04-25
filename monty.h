@@ -39,19 +39,27 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct command_arg - a command and its argument (used in parsing and push)
+ * @command: a command/opcode
+ * @arg: an integer argument of the command (used for push)
+ *
+ * Description: if command is push, arg is pushed onto the stack/queue
+ * pushing is the only time this is used
+ */
 typedef struct command_arg
 {
 	char *command;
 	int arg;
 } command_arg;
 
-extern int s_or_q;
+extern unsigned int line_number;
 
-void (*get_func(char *command, unsigned int line_number))(stack_t **stack, unsigned int line_number);
+void (*get_func(char *command))(stack_t **stack, unsigned int line_number);
 
-command_arg *parse_line(char *line, unsigned int line_number);
+command_arg *parse_line(char *line);
 
-void push_to_stack(stack_t **stack, int n);
+void push_to_stack(stack_t **stack, int n, int s_or_q);
 
 void print_all(stack_t **stack, unsigned int line_number);
 

@@ -1,8 +1,12 @@
 #include "monty.h"
 
-int s_or_q;
-
-void push_to_stack(stack_t **stack, int n)
+/**
+ * push_to_stack - pushes a value onto the top of a stack / head of queue
+ * @stack: linked list representing stack
+ * @n: value to be added
+ * @s_or_q: bool indicating if linked list is treated as a stack or as a queue
+ */
+void push_to_stack(stack_t **stack, int n, int s_or_q)
 {
 	stack_t *ptr;
 	stack_t *end;
@@ -43,7 +47,13 @@ void push_to_stack(stack_t **stack, int n)
 	}
 }
 
-void print_all(stack_t **stack, __attribute__((unused))unsigned int line_number)
+/**
+ * print_all - prints entire stack / queue
+ * @stack: link list representing a stack
+ * @line_number: line number of command in bytecode file (used for error)
+ */
+void print_all(stack_t **stack,
+	       __attribute__((unused))unsigned int line_number)
 {
 	stack_t *ptr;
 
@@ -59,6 +69,11 @@ void print_all(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	}
 }
 
+/**
+ * print_int - prints value on top of stack
+ * @stack: link list representing a stack
+ * @line_number: line number of command in bytecode file (used for error)
+ */
 void print_int(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
@@ -70,6 +85,11 @@ void print_int(stack_t **stack, unsigned int line_number)
 	printf("%d\n", (*stack)->n);
 }
 
+/**
+ * pop_int - removes value from top of stack
+ * @stack: link list representing a stack
+ * @line_number: line number of command in bytecode file (used for error)
+ */
 void pop_int(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
@@ -87,6 +107,11 @@ void pop_int(stack_t **stack, unsigned int line_number)
 		tmp->prev = NULL;
 }
 
+/**
+ * swap_ints - swaps first two values from top of stack
+ * @stack: link list representing a stack
+ * @line_number: line number of command in bytecode file (used for error)
+ */
 void swap_ints(stack_t **stack, unsigned int line_number)
 {
 	int tmp_int;
@@ -94,7 +119,8 @@ void swap_ints(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't swap, stack too short\n",
+			line_number);
 		exit(EXIT_FAILURE);
 	}
 

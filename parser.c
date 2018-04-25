@@ -1,6 +1,14 @@
 #include "monty.h"
 
-command_arg *parse_line(char *line, unsigned int line_number)
+unsigned int line_number;
+
+/**
+ * parse_line - parses a line from bytecode file
+ * @line: line from file
+ *
+ * Return: a struct pointer containing an opcode and an argument
+ */
+command_arg *parse_line(char *line)
 {
 	char *end_ptr;
 	command_arg *ret = malloc(sizeof(command_arg));
@@ -42,8 +50,8 @@ command_arg *parse_line(char *line, unsigned int line_number)
 
 	end_ptr = line;
 	while (*end_ptr != ' ' && *end_ptr != '\t' &&
-               *end_ptr != '\n' && *end_ptr != '\0')
-                end_ptr++;
+	       *end_ptr != '\n' && *end_ptr != '\0')
+		end_ptr++;
 
 	if (end_ptr != line)
 	{
@@ -56,5 +64,5 @@ command_arg *parse_line(char *line, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	return ret;
+	return (ret);
 }

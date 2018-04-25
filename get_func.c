@@ -1,6 +1,14 @@
 #include "monty.h"
 
-void (*get_func(char *command, unsigned int line_number))(stack_t **stack, unsigned int line_number)
+unsigned int line_number;
+
+/**
+ * get_func - returns function that carries out a given opcode's command
+ * @command: the opcode
+ *
+ * Return: the corresponding function
+ */
+void (*get_func(char *command))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t opcode_array[] = {
 		{"pall", print_all},
