@@ -38,7 +38,13 @@ int main(int ac, char **av)
 	{
 		my_command = parse_line(buf);
 
-		if (strcmp(my_command->command, "push") == 0)
+		if (my_command == NULL)
+		{
+			line_number++;
+			chars_read = getline(&buf, &buf_size, fp);
+			continue;
+		}
+		else if (strcmp(my_command->command, "push") == 0)
 			push_to_stack(&my_stack, my_command->arg, s_or_q);
 		else if (strcmp(my_command->command, "stack") == 0)
 			s_or_q = STACK;
@@ -50,7 +56,6 @@ int main(int ac, char **av)
 		line_number++;
 		chars_read = getline(&buf, &buf_size, fp);
 
-		free(my_command->command);
 		free(my_command);
 	}
 
