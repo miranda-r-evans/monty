@@ -40,6 +40,7 @@ int main(int ac, char **av)
 	{
 		if (buf == NULL)
 		{
+			printf("Error: malloc failed\n");
 			i = EXIT_FAILURE;
 			break;
 		}
