@@ -48,7 +48,7 @@ int main(int ac, char **av)
 		else if (my_command->command == NULL)
 		{
 			free(my_command);
-			printf("L%d: push integer\n", line_number);
+			printf("L%d: usage: push integer\n", line_number);
 			i = EXIT_FAILURE;
 			break;
 		}
