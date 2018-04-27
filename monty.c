@@ -35,8 +35,14 @@ int main(int ac, char **av)
 	fp = fopen(av[1], "r");
 
 	chars_read = getline(&buf, &buf_size, fp);
+
 	while (chars_read > 0)
 	{
+		if (buf == NULL)
+		{
+			i = EXIT_FAILURE;
+			break;
+		}
 		my_command = parse_line(buf);
 
 		if (my_command == NULL)
@@ -65,7 +71,8 @@ int main(int ac, char **av)
 			break;
 	}
 
-	free(buf);
+	if (buf != NULL)
+		free(buf);
 
 	fclose(fp);
 
