@@ -39,5 +39,5 @@ int (*get_func(char *command))(stack_t **stack, unsigned int line_number)
 	}
 
 	printf("L%u: unknown instruction %s\n", line_number, command);
-	exit(EXIT_FAILURE);
+	return(EXIT_FAILURE);
 }

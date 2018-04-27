@@ -53,8 +53,8 @@ command_arg *parse_line(char *line)
 		}
 		else
 		{
-			free(ret);
 			printf("L%d: usage: push integer\n", line_number);
+			free(ret);
 			return (NULL);
 		}
 	}
