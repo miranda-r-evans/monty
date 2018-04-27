@@ -23,14 +23,24 @@ command_arg *parse_line(char *line)
 	ret = malloc(sizeof(command_arg));
 	ret->command = strtok(line, delim);
 
-	num_str = strtok(NULL, delim);
-
 	if (strcmp(ret->command, "push") == 0)
 	{
+		num_str = strtok(NULL, delim);
+
 		if (num_str != NULL)
 			ret->arg = atoi(num_str);
 		else
 			ret->command = NULL;
+
+		while (*num_str != '\0')
+		{
+			if (*num_str != '-' && (*num_str > '9' || *num_str < '0'))
+			{
+				ret->command = NULL;
+				break;
+			}
+			num_str++;
+		}
 	}
 
 	return (ret);

@@ -5,6 +5,8 @@
  * @stack: linked list representing stack
  * @n: value to be added
  * @s_or_q: bool indicating if linked list is treated as a stack or as a queue
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int push_to_stack(stack_t **stack, int n, int s_or_q)
 {
@@ -12,7 +14,7 @@ int push_to_stack(stack_t **stack, int n, int s_or_q)
 	stack_t *end;
 
 	if (stack == NULL)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 
 	ptr = malloc(sizeof(stack_t));
 	if (ptr == NULL)
@@ -54,6 +56,8 @@ int push_to_stack(stack_t **stack, int n, int s_or_q)
  * print_all - prints entire stack / queue
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int print_all(stack_t **stack,
 	       __attribute__((unused))unsigned int line_number)
@@ -78,6 +82,8 @@ int print_all(stack_t **stack,
  * print_int - prints value on top of stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int print_int(stack_t **stack, unsigned int line_number)
 {
@@ -96,6 +102,8 @@ int print_int(stack_t **stack, unsigned int line_number)
  * pop_int - removes value from top of stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int pop_int(stack_t **stack, unsigned int line_number)
 {
@@ -120,6 +128,8 @@ int pop_int(stack_t **stack, unsigned int line_number)
  * swap_ints - swaps first two values from top of stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int swap_ints(stack_t **stack, unsigned int line_number)
 {

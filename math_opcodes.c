@@ -10,6 +10,8 @@
  * add_ints - adds first two ints from top of stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int add_ints(stack_t **stack, unsigned int line_number)
 {
@@ -29,6 +31,8 @@ int add_ints(stack_t **stack, unsigned int line_number)
  * sub_ints - subtracts value at top of stack from next value on stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int sub_ints(stack_t **stack, unsigned int line_number)
 {
@@ -48,6 +52,8 @@ int sub_ints(stack_t **stack, unsigned int line_number)
  * div_ints - 2nd value on stack is divided by value on top of stack
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int div_ints(stack_t **stack, unsigned int line_number)
 {
@@ -73,6 +79,8 @@ int div_ints(stack_t **stack, unsigned int line_number)
  * mul_ints - top two values on stack are multiplied
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int mul_ints(stack_t **stack, unsigned int line_number)
 {
@@ -92,6 +100,8 @@ int mul_ints(stack_t **stack, unsigned int line_number)
  * mod_ints - 2nd value on stack is modulo'd by value on top
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int mod_ints(stack_t **stack, unsigned int line_number)
 {

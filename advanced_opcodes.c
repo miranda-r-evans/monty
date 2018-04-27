@@ -4,6 +4,8 @@
  * no_op - this does nothing
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int no_op(__attribute__((unused))stack_t **stack,
 	   __attribute__((unused))unsigned int line_number)
@@ -15,6 +17,8 @@ int no_op(__attribute__((unused))stack_t **stack,
  * print_char - prints top value on stack as a char
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int print_char(stack_t **stack, unsigned int line_number)
 {
@@ -40,6 +44,8 @@ int print_char(stack_t **stack, unsigned int line_number)
  * print_string - prints stack as a string
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int print_string(stack_t **stack,
 		  __attribute__((unused))unsigned int line_number)
@@ -69,6 +75,8 @@ int print_string(stack_t **stack,
  * rotate_left - rotates the stack left
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int rotate_left(stack_t **stack,
 		 __attribute__((unused))unsigned int line_number)
@@ -96,6 +104,8 @@ int rotate_left(stack_t **stack,
  * rotate_right - rotates the stack right
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: 0 or EXIT_FAILURE
  */
 int rotate_right(stack_t **stack,
 		  __attribute__((unused))unsigned int line_number)

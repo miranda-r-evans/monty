@@ -38,6 +38,6 @@ int (*get_func(char *command))(stack_t **stack, unsigned int line_number)
 		opcode_ptr++;
 	}
 
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
+	printf("L%u: unknown instruction %s\n", line_number, command);
 	exit(EXIT_FAILURE);
 }
