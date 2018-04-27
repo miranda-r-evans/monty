@@ -89,7 +89,7 @@ int print_int(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		printf("L%d: can't pint, stack empty\n", line_number);
 		return (EXIT_FAILURE);
 	}
 
