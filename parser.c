@@ -14,13 +14,22 @@ command_arg *parse_line(char *line)
 	const char *delim = " \t\n";
 	char *num_str;
 
+	ret = malloc(sizeof(command_arg));
+	if (ret == NULL)
+	{
+		printf("Error: malloc failed\n");
+		return (NULL);
+	}
+
 	while (*line == ' ' || *line == '\t')
 		line++;
 
 	if (*line == '#' || *line == '\n' || *line == '\0')
-		return (NULL);
+	{
+		ret->command = NULL;
+		return (ret);
+	}
 
-	ret = malloc(sizeof(command_arg));
 	ret->command = strtok(line, delim);
 
 	if (strcmp(ret->command, "push") == 0)
@@ -35,14 +44,18 @@ command_arg *parse_line(char *line)
 				if (*num_str != '-' && (*num_str > '9' ||
 							*num_str < '0'))
 				{
-					ret->command = NULL;
-					break;
+					printf("L%d: usage: push integer\n", line_number);
+					free(ret);
+					return (NULL);
 				}
 				num_str++;
 			}
 		}
 		else
-			ret->command = NULL;
+		{
+			free(ret);
+			return (NULL);
+		}
 	}
 
 	return (ret);

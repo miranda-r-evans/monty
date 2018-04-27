@@ -41,17 +41,11 @@ int main(int ac, char **av)
 
 		if (my_command == NULL)
 		{
-			line_number++;
-			chars_read = getline(&buf, &buf_size, fp);
-			continue;
-		}
-		else if (my_command->command == NULL)
-		{
-			free(my_command);
-			printf("L%d: usage: push integer\n", line_number);
 			i = EXIT_FAILURE;
 			break;
 		}
+		else if (my_command->command == NULL)
+			;
 		else if (strcmp(my_command->command, "push") == 0)
 			i = push_to_stack(&my_stack, my_command->arg, s_or_q);
 		else if (strcmp(my_command->command, "stack") == 0)
