@@ -25,8 +25,13 @@ command_arg *parse_line(char *line)
 
 	num_str = strtok(NULL, delim);
 
-	if (num_str != NULL)
-		ret->arg = atoi(num_str);
+	if (strcmp(ret->command, "push") == 0)
+	{
+		if (num_str != NULL)
+			ret->arg = atoi(num_str);
+		else
+			ret->command = NULL;
+	}
 
 	return (ret);
 }

@@ -8,7 +8,7 @@ unsigned int line_number;
  *
  * Return: the corresponding function
  */
-void (*get_func(char *command))(stack_t **stack, unsigned int line_number)
+int (*get_func(char *command))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t opcode_array[] = {
 		{"pall", print_all},

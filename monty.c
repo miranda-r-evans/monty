@@ -18,16 +18,17 @@ int main(int ac, char **av)
 	ssize_t chars_read;
 	command_arg *my_command;
 	int s_or_q = STACK;
+	int i = 0;
 
 	if (ac != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
+		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
 	if (access(av[1], R_OK) != 0)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		printf("Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -44,24 +45,37 @@ int main(int ac, char **av)
 			chars_read = getline(&buf, &buf_size, fp);
 			continue;
 		}
+		else if (my_command->command == NULL)
+		{
+			free(my_command);
+			printf("L%d: push integer\n", line_number);
+			i = EXIT_FAILURE;
+			break;
+		}
 		else if (strcmp(my_command->command, "push") == 0)
-			push_to_stack(&my_stack, my_command->arg, s_or_q);
+			i = push_to_stack(&my_stack, my_command->arg, s_or_q);
 		else if (strcmp(my_command->command, "stack") == 0)
 			s_or_q = STACK;
 		else if (strcmp(my_command->command, "queue") == 0)
 			s_or_q = QUEUE;
 		else
-			(get_func(my_command->command))(&my_stack, line_number);
+			i = (get_func(my_command->command))(&my_stack,
+							    line_number);
 
 		line_number++;
 		chars_read = getline(&buf, &buf_size, fp);
 
 		free(my_command);
+
+		if (i == EXIT_FAILURE)
+			break;
 	}
 
 	free(buf);
 
 	fclose(fp);
 
-	return (0);
+	free_stack(my_stack);
+
+	return (i);
 }

@@ -36,7 +36,7 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+        int (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
@@ -55,38 +55,40 @@ typedef struct command_arg
 
 extern unsigned int line_number;
 
-void (*get_func(char *command))(stack_t **stack, unsigned int line_number);
+int (*get_func(char *command))(stack_t **stack, unsigned int line_number);
 
 command_arg *parse_line(char *line);
 
-void push_to_stack(stack_t **stack, int n, int s_or_q);
+void free_stack(stack_t *stack);
 
-void print_all(stack_t **stack, unsigned int line_number);
+int push_to_stack(stack_t **stack, int n, int s_or_q);
 
-void print_int(stack_t **stack, unsigned int line_number);
+int print_all(stack_t **stack, unsigned int line_number);
 
-void pop_int(stack_t **stack, unsigned int line_number);
+int print_int(stack_t **stack, unsigned int line_number);
 
-void swap_ints(stack_t **stack, unsigned int line_number);
+int pop_int(stack_t **stack, unsigned int line_number);
 
-void add_ints(stack_t **stack, unsigned int line_number);
+int swap_ints(stack_t **stack, unsigned int line_number);
 
-void no_op(stack_t **stack, unsigned int line_number);
+int add_ints(stack_t **stack, unsigned int line_number);
 
-void sub_ints(stack_t **stack, unsigned int line_number);
+int no_op(stack_t **stack, unsigned int line_number);
 
-void div_ints(stack_t **stack, unsigned int line_number);
+int sub_ints(stack_t **stack, unsigned int line_number);
 
-void mul_ints(stack_t **stack, unsigned int line_number);
+int div_ints(stack_t **stack, unsigned int line_number);
 
-void mod_ints(stack_t **stack, unsigned int line_number);
+int  mul_ints(stack_t **stack, unsigned int line_number);
 
-void print_char(stack_t **stack, unsigned int line_number);
+int mod_ints(stack_t **stack, unsigned int line_number);
 
-void print_string(stack_t **stack, unsigned int line_number);
+int print_char(stack_t **stack, unsigned int line_number);
 
-void rotate_left(stack_t **stack, unsigned int line_number);
+int print_string(stack_t **stack, unsigned int line_number);
 
-void rotate_right(stack_t **stack, unsigned int line_number);
+int rotate_left(stack_t **stack, unsigned int line_number);
+
+int rotate_right(stack_t **stack, unsigned int line_number);
 
 #endif

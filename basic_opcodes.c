@@ -6,19 +6,19 @@
  * @n: value to be added
  * @s_or_q: bool indicating if linked list is treated as a stack or as a queue
  */
-void push_to_stack(stack_t **stack, int n, int s_or_q)
+int push_to_stack(stack_t **stack, int n, int s_or_q)
 {
 	stack_t *ptr;
 	stack_t *end;
 
 	if (stack == NULL)
-		exit(EXIT_FAILURE);
+		return(EXIT_FAILURE);
 
 	ptr = malloc(sizeof(stack_t));
 	if (ptr == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		printf("Error: malloc failed\n");
+		return (EXIT_FAILURE);
 	}
 
 	ptr->n = n;
@@ -43,8 +43,11 @@ void push_to_stack(stack_t **stack, int n, int s_or_q)
 			end = end->next;
 
 		end->next = ptr;
+		ptr->prev = end;
 		ptr->next = NULL;
 	}
+
+	return (0);
 }
 
 /**
@@ -52,13 +55,13 @@ void push_to_stack(stack_t **stack, int n, int s_or_q)
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void print_all(stack_t **stack,
+int print_all(stack_t **stack,
 	       __attribute__((unused))unsigned int line_number)
 {
 	stack_t *ptr;
 
 	if (stack == NULL)
-		return;
+		return (0);
 
 	ptr = *stack;
 
@@ -67,6 +70,8 @@ void print_all(stack_t **stack,
 		printf("%d\n", ptr->n);
 		ptr = ptr->next;
 	}
+
+	return (0);
 }
 
 /**
@@ -74,15 +79,17 @@ void print_all(stack_t **stack,
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void print_int(stack_t **stack, unsigned int line_number)
+int print_int(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 
 	printf("%d\n", (*stack)->n);
+
+	return (0);
 }
 
 /**
@@ -90,14 +97,14 @@ void print_int(stack_t **stack, unsigned int line_number)
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void pop_int(stack_t **stack, unsigned int line_number)
+int pop_int(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		printf("L%d: can't pop an empty stack\n", line_number);
+		return (EXIT_FAILURE);
 	}
 
 	tmp = (*stack)->next;
@@ -105,6 +112,8 @@ void pop_int(stack_t **stack, unsigned int line_number)
 	*stack = tmp;
 	if (tmp != NULL)
 		tmp->prev = NULL;
+
+	return (0);
 }
 
 /**
@@ -112,20 +121,22 @@ void pop_int(stack_t **stack, unsigned int line_number)
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void swap_ints(stack_t **stack, unsigned int line_number)
+int swap_ints(stack_t **stack, unsigned int line_number)
 {
 	int tmp_int;
 	stack_t *ptr;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n",
+		printf("L%d: can't swap, stack too short\n",
 			line_number);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 
 	ptr = *stack;
 	tmp_int = ptr->n;
 	ptr->n = ptr->next->n;
 	ptr->next->n = tmp_int;
+
+	return (0);
 }

@@ -5,9 +5,10 @@
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void no_op(__attribute__((unused))stack_t **stack,
+int no_op(__attribute__((unused))stack_t **stack,
 	   __attribute__((unused))unsigned int line_number)
 {
+	return (0);
 }
 
 /**
@@ -15,22 +16,24 @@ void no_op(__attribute__((unused))stack_t **stack,
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void print_char(stack_t **stack, unsigned int line_number)
+int print_char(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		printf("L%d: can't pchar, stack empty\n", line_number);
+		return (EXIT_FAILURE);
 	}
 
 	if ((*stack)->n < 0 || (*stack)->n > 127)
 	{
-		fprintf(stderr, "L%d: can't pchar, value out of range\n",
+		printf("L%d: can't pchar, value out of range\n",
 			line_number);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 
 	printf("%c\n", (*stack)->n);
+
+	return (0);
 }
 
 /**
@@ -38,7 +41,7 @@ void print_char(stack_t **stack, unsigned int line_number)
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void print_string(stack_t **stack,
+int print_string(stack_t **stack,
 		  __attribute__((unused))unsigned int line_number)
 {
 	stack_t *ptr;
@@ -46,7 +49,7 @@ void print_string(stack_t **stack,
 	if (stack == NULL || *stack == NULL)
 	{
 		printf("\n");
-		return;
+		return (0);
 	}
 
 	ptr = *stack;
@@ -58,6 +61,8 @@ void print_string(stack_t **stack,
 	}
 
 	printf("\n");
+
+	return (0);
 }
 
 /**
@@ -65,13 +70,13 @@ void print_string(stack_t **stack,
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void rotate_left(stack_t **stack,
+int rotate_left(stack_t **stack,
 		 __attribute__((unused))unsigned int line_number)
 {
 	stack_t *end;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		return;
+		return (0);
 
 	end = *stack;
 
@@ -83,6 +88,8 @@ void rotate_left(stack_t **stack,
 	end->next = *stack;
 	*stack = (*stack)->next;
 	end->next->next = NULL;
+
+	return (0);
 }
 
 /**
@@ -90,13 +97,13 @@ void rotate_left(stack_t **stack,
  * @stack: link list representing a stack
  * @line_number: line number of command in bytecode file (used for error)
  */
-void rotate_right(stack_t **stack,
+int rotate_right(stack_t **stack,
 		  __attribute__((unused))unsigned int line_number)
 {
 	stack_t *end;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		return;
+		return (0);
 
 	end = *stack;
 
@@ -109,4 +116,6 @@ void rotate_right(stack_t **stack,
 	end->next = *stack;
 	(*stack)->prev = end;
 	*stack = end;
+
+	return (0);
 }
