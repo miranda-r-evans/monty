@@ -3,6 +3,20 @@
 unsigned int line_number;
 
 /**
+ * failure - exits program in case of invalid command
+ * @stack: linked list representing stack
+ * @line_number: line number of command in bytecode file (used for error)
+ *
+ * Return: EXIT_FAILURE
+ */
+int failure(__attribute__((unused))stack_t **stack,
+	    __attribute__((unused))unsigned int line_number)
+{
+	return (EXIT_FAILURE);
+}
+
+
+/**
  * get_func - returns function that carries out a given opcode's command
  * @command: the opcode
  *
@@ -39,5 +53,6 @@ int (*get_func(char *command))(stack_t **stack, unsigned int line_number)
 	}
 
 	printf("L%u: unknown instruction %s\n", line_number, command);
-	return(EXIT_FAILURE);
+
+	return (failure);
 }

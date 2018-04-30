@@ -91,4 +91,6 @@ int rotate_left(stack_t **stack, unsigned int line_number);
 
 int rotate_right(stack_t **stack, unsigned int line_number);
 
+int failure(stack_t **stack, unsigned int line_number);
+
 #endif
